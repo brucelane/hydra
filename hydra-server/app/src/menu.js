@@ -90,25 +90,25 @@ class Menu {
   }
 
   closeModal () {
-    /*document.getElementById("info-container").className = "hidden"
+    document.getElementById("info-container").className = "hidden"
     this.closeButton.className = "fas fa-question-circle icon"
     this.shareButton.classList.remove('hidden')
     this.clearButton.classList.remove('hidden')
     this.mutatorButton.classList.remove('hidden');
     this.runButton.classList.remove('hidden');
     this.editorText.style.opacity = 1
-    this.isClosed = true*/
+    this.isClosed = true
   }
 
   openModal () {
-    /*document.getElementById("info-container").className = ""
+    document.getElementById("info-container").className = ""
     this.closeButton.className = "fas fa-times icon"
     this.shareButton.classList.add('hidden')
     this.clearButton.classList.add('hidden')
     this.mutatorButton.classList.add('hidden');
     this.runButton.classList.add('hidden');
     this.editorText.style.opacity = 0.0
-    this.isClosed = false*/
+    this.isClosed = false
   }
 
   mutateSketch(evt) {
