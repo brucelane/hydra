@@ -15,8 +15,8 @@ require('dotenv').config()
 require('./twitter-gallery.js')(app)
 
 app.use(express.static(path.join(__dirname, '/public')))
-app.use(express.static('public'))
-console.log("DIRECTORY= "+path.join(__dirname, '/public'));
+//app.use(express.static('public'))
+//console.log("DIRECTORY= "+path.join(__dirname, '/public'));
 // crear un servidor en puerto 8000
 server.listen(8000, function () {
   // imprimir la direccion ip en la consola
