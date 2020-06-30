@@ -22,3 +22,6 @@ server.listen(8000, function () {
 })
 
 app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static('/public'))
+server.use(express.static(path.join(__dirname, '/public')))
+console.log('end')
