@@ -38,7 +38,10 @@ class Menu {
     repl.eval(this.editor.getValue(), (string, err) => {
     //  console.log('eval', err)
      this.editor.flashCode()
-      if(!err) this.sketches.saveLocally(this.editor.getValue())
+      if(!err) {
+        //console.log('bruce')
+        this.sketches.saveLocally(this.editor.getValue())
+      } 
     })
   }
 

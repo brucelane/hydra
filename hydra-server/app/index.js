@@ -72,6 +72,90 @@ function init () {
     room: 'iclc'
   })
 
+
+
+// bruce
+    // websocket begin
+    let peerConn = null;
+    /*window.socket = new WebSocket('ws://127.0.0.1:8088');
+    window.socket.onmessage = function(evt) {
+      var messageData = JSON.parse(evt.data);
+      if (messageData.sdp) {
+        console.log('Received SDP from remote peer');
+        peerConn.setRemoteDescription(new RTCSessionDescription(messageData.sdp));
+      } else if (messageData.candidate) {
+        console.log('Received ICECandidate from remote peer ' + messageData.candidate);
+      } else {
+        console.log('Received from remote peer ' + evt.data);
+      }
+    }; */
+    
+    window.ws = (function (uri) {
+      console.log('ws init')
+      ws = new WebSocket(uri);
+      ws.onmessage = function(evt) {
+        var messageData = JSON.parse(evt.data);
+        if (messageData.sdp) {
+          console.log('Received SDP from remote peer');
+          peerConn.setRemoteDescription(new RTCSessionDescription(messageData.sdp));
+        } else if (messageData.candidate) {
+          console.log('Received ICECandidate from remote peer ' + messageData.candidate);
+        } else if (messageData.hydra) {
+          console.log('Received hydramsg from remote peer ' + messageData.hydra);
+        } else if (messageData.event) {
+          console.log('Received event from remote peer ' + messageData.event);
+          if (messageData.event == 'editortext') {
+            console.log('editortext message ' + messageData.message);
+            console.log('window.editor ' + window.editor);
+            //if (window.editor && window.editor.cm ) {
+              let sk = messageData.message
+              .substr(1, messageData.message.length - 2).replace('\n',' ')
+              editor.setValue(sk)
+            //}
+          } else {
+
+            var editorEvt = new CustomEvent(messageData.event);
+            editorEvt.data = messageData.message;
+            if (window.editor && window.editor.cm ) {
+              window.editor.cm.setValue(messageData.message)
+            }
+            ws.dispatchEvent(editorEvt);
+          }
+        } else {
+          console.log('Received unknown from remote peer ' + evt.data);
+        }
+        //var customEvt = new CustomEvent(messageData.event);
+        //customEvt.data = messageData.message;
+        //ws.dispatchEvent(customEvt);
+      };
+      this.emit = function(evt, data) {
+        ws.send(JSON.stringify({event:evt, message: data}));
+      };
+      this.send = function(data) {
+        console.log('ws readyState' + ws.readyState);
+        /*
+        CONNECTING	0	
+        OPEN	1	
+        CLOSING	2	
+        CLOSED	3	
+        */
+        if (ws.readyState == 1) ws.send(data);
+      };
+      this.on = function(evt, func) {
+        ws.addEventListener(evt, func);
+      };
+      ws.onerror = function(e) {console.log('error: ' + e)};
+      ws.onopen = function(evt) {console.log('Socket opened')};
+      ws.onclose = function(evt) {console.log('Socket closed')};
+    });
+    //window.socket = new ws('ws://turbulens.fr/ws/');
+    window.socket = new ws('ws://51.210.25.83:8088');
+    // websocket end
+
+
+
+
+
   var engine = loop(function(dt) {
     hydra.tick(dt)
   }).start()
