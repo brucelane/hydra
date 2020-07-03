@@ -58,12 +58,16 @@ EditorClass.prototype.setValue = function (val) {
   // avoid socket loop
   let prev = this.cm.getValue()
   console.log(`prev ${prev.length} val ${val.length}`)
-  if ( prev != val) {
+  if ( prev.length != val.length) {
     console.log(`prev ${prev.substring(0,15)} != val ${val.substring(0,15)}`)
     this.cm.setValue(val)
   } else {
-    console.log(`prev ${prev.substring(0,15)} , val ${val.substring(0,15)}`)
-    console.log(`prev ${prev} == val ${val}`)
+    if ( prev == val) {
+      console.log(`prev == val`)
+
+    } else {
+      console.log(`prev != val`)
+    }
   }
 }
 
