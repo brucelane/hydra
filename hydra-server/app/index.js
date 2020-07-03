@@ -108,18 +108,21 @@ function init () {
           if (messageData.event == 'editortext') {
             console.log('editortext message ' + messageData.message);
             console.log('window.editor ' + window.editor);
+            let code = messageData.message
+              editor.setValue(code)
+              repl.eval(code)
             //if (window.editor && window.editor.cm ) {
-              let sk = messageData.message
-              .substr(1, messageData.message.length - 2).replace('\n',' ')
-              editor.setValue(sk)
+              //let sk = messageData.message
+              //.substr(0, messageData.message.length)
+              //editor.setValue(sk)
             //}
           } else {
-
+// not hit
             var editorEvt = new CustomEvent(messageData.event);
             editorEvt.data = messageData.message;
             if (window.editor && window.editor.cm ) {
               let code = messageData.message
-              //window.editor.cm.setValue(messageData.message)
+              
               editor.setValue(code)
               repl.eval(code)
             }
