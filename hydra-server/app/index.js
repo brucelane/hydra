@@ -84,14 +84,7 @@ function init() {
     ws.onmessage = function (evt) {
       var messageData = JSON.parse(evt.data);
 
-      if (messageData.sdp) {
-        console.log('Received SDP from remote peer');
-        peerConn.setRemoteDescription(new RTCSessionDescription(messageData.sdp));
-      } else if (messageData.candidate) {
-        console.log('Received ICECandidate from remote peer ' + messageData.candidate);
-      } else if (messageData.hydra) {
-        console.log('Received hydramsg from remote peer ' + messageData.hydra);
-      } else if (messageData.event) {
+      if (messageData.event) {
         console.log('Received event from remote peer ' + messageData.event);
         if (messageData.event == 'editortext') {
           console.log('editortext message ' + messageData.message);
@@ -100,20 +93,11 @@ function init() {
           editor.setValue(code)
           repl.eval(code)
 
-        } else {
-          // not hit
-          var editorEvt = new CustomEvent(messageData.event);
-          editorEvt.data = messageData.message;
-          if (window.editor && window.editor.cm) {
-          }
-          ws.dispatchEvent(editorEvt);
-        }
+        } 
       } else {
         console.log('Received unknown from remote peer ' + evt.data);
       }
-      //var customEvt = new CustomEvent(messageData.event);
-      //customEvt.data = messageData.message;
-      //ws.dispatchEvent(customEvt);
+  
     };
     this.emit = function (evt, data) {
       ws.send(JSON.stringify({ event: evt, message: data }));
@@ -148,7 +132,33 @@ function init() {
   setInterval(function () {
     if (window.ws.readyState != 1) {
       console.log('Socket connection retry')
-      window.socket = new window.ws('todo1');
+      window.socket = new WebSocket('wss://sophiadigitalart.fr/ws/');
+      console.log(`1 window.socket: ${window.socket}`)
+      console.log(`2 window.ws: ${window.ws}`)
+      window.ws = new WebSocket('wss://sophiadigitalart.fr/ws/');
+      console.log(`3 window.ws: ${window.ws}`)
+      window.ws.onmessage = function (evt) {
+        var messageData = JSON.parse(evt.data);
+        if (messageData.event) {
+          console.log('4 Received ' + messageData.event);
+          if (messageData.event == 'editortext') {
+            console.log('5 editortext message ' + messageData.message);
+  
+            let code = messageData.message
+            editor.setValue(code)
+            repl.eval(code)
+  
+          } 
+        } else {
+          console.log('6 Received unknown from remote peer ' + evt.data);
+        }
+      };
+      window.ws.send = function (data) {
+        console.log('7 ws readyState' + ws.readyState);
+        if (ws.readyState == 1) {
+          ws.send(data);
+        }
+      };
     }
   }, 5000);
 
