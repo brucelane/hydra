@@ -79,7 +79,7 @@ function init() {
   // websocket begin
   let peerConn = null;
   window.ws = (function (uri) {
-    console.log('ws init')
+    console.log(`ws init, uri: ${uri}`)
     ws = new WebSocket('wss://sophiadigitalart.fr/ws/');// TMP hardcoded uri);
     ws.onmessage = function (evt) {
       var messageData = JSON.parse(evt.data);
@@ -122,9 +122,9 @@ function init() {
       console.log('ws readyState' + ws.readyState);
       /*
       CONNECTING	0	
-      OPEN	1	
-      CLOSING	2	
-      CLOSED	3	
+      OPEN	      1	
+      CLOSING	    2	
+      CLOSED	    3	
       */
       if (ws.readyState == 1) {
         ws.send(data);
@@ -146,9 +146,10 @@ function init() {
 
   // 20200703 borrino!
   setInterval(function () {
-    if (window.socket.readyState != 1) {
+    if (window.ws.readyState != 1) {
       console.log('Socket connection retry')
-      window.socket = new ws(`${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);
+      window.socket = window.ws('todo');
+      window.socket = new window.ws('todo1');
     }
   }, 5000);
 
