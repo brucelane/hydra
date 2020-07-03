@@ -6,9 +6,9 @@ const express = require('express')
 const app = express()
 const browserify = require('browserify-middleware')
 const path = require('path')
-// 20200630  const configureSSL = require('./configure-ssl.js')
-// var server = configureSSL(app)
-var server = app
+const configureSSL = require('./configure-ssl.js')
+var server = configureSSL(app)
+//var server = app
 
 //
 // TURN server access
