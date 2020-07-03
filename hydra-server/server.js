@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, '/public')))
 server.listen(8000, function () {
   // imprimir la direccion ip en la consola
   // console.log('servidor disponible en https://'+myip.getLocalIP4()+':8000')
-  console.log('server available at http://localhost:8000')
+  console.log(`server available at ${process.env.SDA}:${process.env.PORT}`)
 })
 
 
