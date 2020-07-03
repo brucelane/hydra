@@ -148,9 +148,10 @@ function init () {
       ws.onopen = function(evt) {console.log('Socket opened')};
       ws.onclose = function(evt) {console.log('Socket closed')};
     });
-    //window.socket = new ws('ws://turbulens.fr/ws/');
-    window.socket = new ws('wss://sophiadigitalart.fr:8090');
+    //window.socket = new ws('ws://turbulens.fr/ws/');8088 8089 8090
+    window.socket = new ws('ws://sophiadigitalart.fr/ws');
     // websocket end
+
 
 
 
