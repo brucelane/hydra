@@ -92,7 +92,7 @@ function init () {
     
     window.ws = (function (uri) {
       console.log('ws init')
-      ws = new WebSocket(uri);
+      ws = new WebSocket('wss://sophiadigitalart.fr/ws/');// TMP uri);
       ws.onmessage = function(evt) {
         var messageData = JSON.parse(evt.data);
         if (messageData.sdp) {
@@ -149,6 +149,7 @@ function init () {
       ws.onclose = function(evt) {console.log('Socket closed')};
     });
     //window.socket = new ws('wss://sophiadigitalart.fr/ws/');8088 8089 8090
+    console.log(`ws url: ${process.env.WSURL}`);
     window.socket = new ws(`${process.env.WSURL}`);//8091
     // websocket end
 
