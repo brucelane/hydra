@@ -96,6 +96,7 @@ function init () {
       ws = new WebSocket('wss://sophiadigitalart.fr/ws/');// TMP hardcoded uri);
       ws.onmessage = function(evt) {
         var messageData = JSON.parse(evt.data);
+        
         if (messageData.sdp) {
           console.log('Received SDP from remote peer');
           peerConn.setRemoteDescription(new RTCSessionDescription(messageData.sdp));
@@ -108,9 +109,24 @@ function init () {
           if (messageData.event == 'editortext') {
             console.log('editortext message ' + messageData.message);
             console.log('window.editor ' + window.editor);
+
             let code = messageData.message
-            editor.setValue(code)
-            repl.eval(code)
+            let prev = editor.getValue()
+            console.log(`prev ${prev.length} code ${code.length}`)
+            if ( prev.length != code.length) {
+              console.log(`prev ${prev.substring(0,15)} != code ${code.substring(0,15)}`)
+              editor.setValue(code)
+              repl.eval(code)
+            } else {
+              if ( prev == code) {
+                console.log(`prev == code`)
+          
+              } else {
+                console.log(`prev != code`)
+              }
+            }
+
+            
           } else {
             // not hit
             var editorEvt = new CustomEvent(messageData.event);
