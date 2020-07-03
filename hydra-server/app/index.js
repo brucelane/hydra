@@ -44,6 +44,7 @@ function init () {
     } else {
       menu.openModal()
     }
+    menu.closeModal() // 20200703 bruce
   })
   menu.sketches = sketches
 
@@ -117,7 +118,10 @@ function init () {
             var editorEvt = new CustomEvent(messageData.event);
             editorEvt.data = messageData.message;
             if (window.editor && window.editor.cm ) {
-              window.editor.cm.setValue(messageData.message)
+              let code = messageData.message
+              //window.editor.cm.setValue(messageData.message)
+              editor.setValue(code)
+              repl.eval(code)
             }
             ws.dispatchEvent(editorEvt);
           }
