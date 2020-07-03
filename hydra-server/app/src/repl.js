@@ -8,30 +8,7 @@ module.exports = {
     try {
       eval(jsString)
       // log(jsString)
-      console.log('send to ws server')
-      // 20200703 bruce
-      if (window.socket) {
-        console.log('window.socket ok')
-        try {
-          //window.socket.send(JSON.stringify({event:'editortext', message: JSON.stringify(jsString) }));
-          window.socket.send(JSON.stringify({event:'editortext', message: jsString }));
-        } catch (e) {
-          // handle error (server not connected for example)
-          console.log(" websocket error", JSON.stringify(e))
-        }
-      }
-      /* before 25 september 2019 OK
-      if (window.socket) {
-        try {
-          window.socket.send(JSON.stringify({event:'frag', message: this.compile(pass)}));
-          window.socket.send(JSON.stringify({event:'hydra', message: JSON.stringify(pass) }));
-        } catch (e) {
-          // handle error (server not connected for example)
-          console.log(" websocket error", JSON.stringify(e))
-        }
-      } */
-
-
+      
       log('')
     } catch (e) {
       isError = true

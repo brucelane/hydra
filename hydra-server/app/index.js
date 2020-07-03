@@ -108,23 +108,22 @@ function init () {
           console.log('Received event from remote peer ' + messageData.event);
           if (messageData.event == 'editortext') {
             console.log('editortext message ' + messageData.message);
-            console.log('window.editor ' + window.editor);
 
             let code = messageData.message
-            let prev = editor.getValue()
+            /*let prev = editor.getValue()
             console.log(`prev ${prev.length} code ${code.length}`)
             if ( prev.length != code.length) {
-              console.log(`prev ${prev.substring(0,15)} != code ${code.substring(0,15)}`)
+              console.log(`prev ${prev.substring(0,15)} != code ${code.substring(0,15)}`)*/
               editor.setValue(code)
               repl.eval(code)
-            } else {
+            /*} else {
               if ( prev == code) {
                 console.log(`prev == code`)
           
               } else {
                 console.log(`prev != code`)
               }
-            }
+            }*/
 
             
           } else {
@@ -162,15 +161,15 @@ function init () {
       };
       ws.onerror = function(e) {console.log('error: ' + e)};
       ws.onopen = function(evt) {console.log('Socket opened')};
-      ws.onclose = function(evt) {console.log('Socket closed')};
+      ws.onclose = function(evt) {
+        console.log('Socket closed, retrying')
+        window.socket = new ws(`${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);
+      };
     });
     //window.socket = new ws('wss://sophiadigitalart.fr/ws/');8088 8089 8090
     console.log(`ws url: ${process.env.WSURL} or ${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);
     window.socket = new ws(`${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);//8091
     // websocket end
-
-
-
 
 
   var engine = loop(function(dt) {
