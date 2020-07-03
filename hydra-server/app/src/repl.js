@@ -13,7 +13,8 @@ module.exports = {
       if (window.socket) {
         console.log('window.socket ok')
         try {
-          window.socket.send(JSON.stringify({event:'editortext', message: JSON.stringify(jsString) }));
+          //window.socket.send(JSON.stringify({event:'editortext', message: JSON.stringify(jsString) }));
+          window.socket.send(JSON.stringify({event:'editortext', message: jsString }));
         } catch (e) {
           // handle error (server not connected for example)
           console.log(" websocket error", JSON.stringify(e))

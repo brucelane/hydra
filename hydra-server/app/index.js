@@ -149,8 +149,8 @@ function init () {
       ws.onclose = function(evt) {console.log('Socket closed')};
     });
     //window.socket = new ws('wss://sophiadigitalart.fr/ws/');8088 8089 8090
-    console.log(`ws url: ${process.env.WSURL}`);
-    window.socket = new ws(`${process.env.WSURL}`);//8091
+    console.log(`ws url: ${process.env.WSURL} or ${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);
+    window.socket = new ws(`${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);//8091
     // websocket end
 
 
