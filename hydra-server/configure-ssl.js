@@ -7,17 +7,6 @@ module.exports = (app) => {
   if(process.env.SDA) {
     var http = require('http')
     server = http.createServer(app)
-
-    /*function checkHttps(req, res, next){
-    if(req.get('X-Forwarded-Proto').indexOf("https")!=-1){
-       // console.log("https, yo")
-        return next()
-      } else {
-        res.redirect('https://' + req.hostname + req.url);
-      }
-    }
-
-    app.all('*', checkHttps)*/
   } else if(process.env.GLITCH) {
     var http = require('http')
     server = http.createServer(app)

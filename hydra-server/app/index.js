@@ -93,7 +93,7 @@ function init () {
     
     window.ws = (function (uri) {
       console.log('ws init')
-      ws = new WebSocket('wss://sophiadigitalart.fr/ws/');// TMP uri);
+      ws = new WebSocket('wss://sophiadigitalart.fr/ws/');// TMP hardcoded uri);
       ws.onmessage = function(evt) {
         var messageData = JSON.parse(evt.data);
         if (messageData.sdp) {
@@ -109,22 +109,13 @@ function init () {
             console.log('editortext message ' + messageData.message);
             console.log('window.editor ' + window.editor);
             let code = messageData.message
-              editor.setValue(code)
-              repl.eval(code)
-            //if (window.editor && window.editor.cm ) {
-              //let sk = messageData.message
-              //.substr(0, messageData.message.length)
-              //editor.setValue(sk)
-            //}
+            editor.setValue(code)
+            repl.eval(code)
           } else {
-// not hit
+            // not hit
             var editorEvt = new CustomEvent(messageData.event);
             editorEvt.data = messageData.message;
             if (window.editor && window.editor.cm ) {
-              let code = messageData.message
-              
-              editor.setValue(code)
-              repl.eval(code)
             }
             ws.dispatchEvent(editorEvt);
           }
@@ -146,7 +137,9 @@ function init () {
         CLOSING	2	
         CLOSED	3	
         */
-        if (ws.readyState == 1) ws.send(data);
+        if (ws.readyState == 1) {
+          ws.send(data);
+        } 
       };
       this.on = function(evt, func) {
         ws.addEventListener(evt, func);

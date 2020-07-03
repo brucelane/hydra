@@ -55,7 +55,10 @@ EditorClass.prototype.clear = function () {
 }
 
 EditorClass.prototype.setValue = function (val) {
-  this.cm.setValue(val)
+  // avoid socket loop
+  if (this.cm.getValue() !== val) {
+    this.cm.setValue(val)
+  }
 }
 
 EditorClass.prototype.getValue = function () {

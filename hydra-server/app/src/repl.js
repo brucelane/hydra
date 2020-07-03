@@ -9,7 +9,7 @@ module.exports = {
       eval(jsString)
       // log(jsString)
       console.log('send to ws server')
-      // bruce
+      // 20200703 bruce
       if (window.socket) {
         console.log('window.socket ok')
         try {
