@@ -148,7 +148,6 @@ function init() {
   setInterval(function () {
     if (window.ws.readyState != 1) {
       console.log('Socket connection retry')
-      window.socket = window.ws('todo');
       window.socket = new window.ws('todo1');
     }
   }, 5000);
