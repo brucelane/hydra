@@ -172,6 +172,7 @@ class Gallery {
         while (index === this.exampleIndex) {
           index = Math.floor(Math.random() * this.examples.length)
         }
+        console.log("examples index", index)
       // } else {
       //   index = this.exampleIndex +1
       //   if(index >= this.examples.length) index = 0
