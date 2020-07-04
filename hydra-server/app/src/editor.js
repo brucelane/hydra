@@ -346,7 +346,7 @@ EditorClass.prototype.autoComplete = function () {
         editor.setSelection(pos1, pos2)
         break;
       case 'c':
-        editor.replaceRange('cos(time)', pos1, pos2)
+        editor.replaceRange('Math.cos(time)', pos1, pos2)
         pos1.ch += 4;
         pos2.ch += 7;
         editor.setSelection(pos1, pos2)
