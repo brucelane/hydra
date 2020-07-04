@@ -130,7 +130,8 @@ function init() {
 
   // 20200703 borrino!
   setInterval(function () {
-    menu.shuffleSketches()
+    //menu.shuffleSketches()
+    editor.mutator.mutate({reroll: false});
     if (window.ws.readyState != 1) {
       console.log('Socket connection retry')
       window.socket = new WebSocket('wss://sophiadigitalart.fr/ws/');
