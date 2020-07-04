@@ -17,7 +17,7 @@ module.exports = {
 
           // shift - ctrl - G: share sketch
           if (e.keyCode === 71) {
-              e.preventDefault()
+            e.preventDefault()
             menu.shareSketch()
           }
 
@@ -35,27 +35,31 @@ module.exports = {
 
           // shift - ctrl - h: toggle editor
           if (e.keyCode === 72) {
-              e.preventDefault()
+            e.preventDefault()
             editor.toggle()
             log.toggle()
           }
 
           // shift - ctrl - s: screencap
           if (e.keyCode === 83) {
-              e.preventDefault()
+            e.preventDefault()
             screencap()
           }
-        } else {
+        } else { // no shift key
           // ctrl-enter: evalLine
           if ( e.keyCode === 13) {
               e.preventDefault()
           //  console.log('eval line')
             repl.eval(editor.getLine())
           }
+          // ctrl-space: autoComplete
+          if ( e.keyCode === 32) {
+            repl.eval(editor.autoComplete())
+          }
         }
         // ctrl - /: toggle comment
         if (e.keyCode === 191) {
-            e.preventDefault()
+          e.preventDefault()
           editor.cm.toggleComment()
         }
 

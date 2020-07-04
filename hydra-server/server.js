@@ -20,7 +20,8 @@ if(process.env.TWILIO_SID) {
 
 var io = require('socket.io')(server)
 require('./twitter-gallery.js')(app)
-
+const host = process.env.SDA || 'https://localhost';
+const port = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('public'))
 //console.log("DIRECTORY= "+path.join(__dirname, '/public'));
@@ -28,7 +29,7 @@ app.use(express.static(path.join(__dirname, '/public')))
 server.listen(8000, function () {
   // imprimir la direccion ip en la consola
   // console.log('servidor disponible en https://'+myip.getLocalIP4()+':8000')
-  console.log(`server available at ${process.env.SDA}:${process.env.PORT}`)
+  console.log(`server available at ${host}:${port}`)
 })
 
 

@@ -23,10 +23,10 @@ module.exports = (app) => {
     app.all('*', checkHttps)
   } else {
     var https = require('https')
-    //var privateKey = fs.readFileSync(path.join(__dirname, '/certs/key.pem'), 'utf8')
-    //var certificate = fs.readFileSync(path.join(__dirname, '/certs/certificate.pem'), 'utf8')
-    var privateKey = fs.readFileSync('/etc/letsencrypt/live/sophiadigitalart.fr/privkey.pem', 'utf8')
-    var certificate = fs.readFileSync('/etc/letsencrypt/live/sophiadigitalart.fr/fullchain.pem', 'utf8')
+    var privateKey = fs.readFileSync(path.join(__dirname, '/certs/key.pem'), 'utf8')
+    var certificate = fs.readFileSync(path.join(__dirname, '/certs/certificate.pem'), 'utf8')
+    //var privateKey = fs.readFileSync('/etc/letsencrypt/live/sophiadigitalart.fr/privkey.pem', 'utf8')
+    //var certificate = fs.readFileSync('/etc/letsencrypt/live/sophiadigitalart.fr/fullchain.pem', 'utf8')
     var credentials = {key: privateKey, cert: certificate}
     server = https.createServer(credentials, app)
   }
