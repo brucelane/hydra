@@ -225,13 +225,13 @@ EditorClass.prototype.autoComplete = function () {
       editor.setSelection(pos1, pos2)
       break;
     case 'sx':
-      editor.replaceRange('modulateScrollX(o1, scrollX = 0.1, speed = 0.01)', pos1, pos2)
+      editor.replaceRange('modulateScrollX(o0, scrollX = 0.1, speed = 0.01)', pos1, pos2)
       pos1.ch += 16;
       pos2.ch += 16;
       editor.setSelection(pos1, pos2)
       break;
     case 'sy':
-      editor.replaceRange('modulateScrollY(o1, scrollY = 0.1, speed = 0.01)', pos1, pos2)
+      editor.replaceRange('modulateScrollY(o0, scrollY = 0.1, speed = 0.01)', pos1, pos2)
       pos1.ch += 16;
       pos2.ch += 16;
       editor.setSelection(pos1, pos2)
