@@ -340,7 +340,7 @@ EditorClass.prototype.autoComplete = function () {
         editor.setSelection(pos1, pos2)
         break;
       case 's':
-        editor.replaceRange('sin(time)', pos1, pos2)
+        editor.replaceRange('Math.sin(time)', pos1, pos2)
         pos1.ch += 4;
         pos2.ch += 7;
         editor.setSelection(pos1, pos2)
