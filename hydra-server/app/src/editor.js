@@ -220,8 +220,8 @@ EditorClass.prototype.autoComplete = function () {
       break;
     case 'ch':
       editor.replaceRange('chromatic(o0, offsetX = 0.1, offsetY = 0.1)', pos1, pos2)
-      pos1.ch += 14;
-      pos2.ch += 15;
+      pos1.ch += 10;
+      pos2.ch += 11;
       editor.setSelection(pos1, pos2)
       break;
     case 'sx':
@@ -326,12 +326,12 @@ EditorClass.prototype.autoComplete = function () {
         editor.setSelection(pos1, pos2)
         break;
       // main
-      case 'n':
+      /*case 'n':
         editor.replaceRange(`void main () {vec2 st = (2.0*gl_FragCoord.xy-resolution.xy)/resolution.xy; gl_FragColor = vec4(st.x,st.y,0.0,1.0);}`, pos1, pos2)
         pos1.ch += 74;
         pos2.ch += 74;
         editor.setSelection(pos1, pos2)
-        break;
+        break;*/
       // for
       case 'r':
         editor.replaceRange('for (int i=0; i<2 ;i++) { }', pos1, pos2)
