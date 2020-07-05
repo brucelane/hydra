@@ -73,8 +73,6 @@ function init() {
     room: 'iclc'
   })
 
-
-
   // bruce
   // websocket begin
   let peerConn = null;
@@ -83,16 +81,13 @@ function init() {
     ws = new WebSocket('wss://sophiadigitalart.fr/ws/');// TMP hardcoded uri);
     ws.onmessage = function (evt) {
       var messageData = JSON.parse(evt.data);
-
       if (messageData.event) {
         console.log('Received event from remote peer ' + messageData.event);
         if (messageData.event == 'editortext') {
           console.log('editortext message ' + messageData.message);
-
           let code = messageData.message
           editor.setValue(code)
           repl.eval(code)
-
         } 
       } else {
         console.log('Received unknown from remote peer ' + evt.data);
@@ -105,10 +100,10 @@ function init() {
     this.send = function (data) {
       console.log('ws readyState' + ws.readyState);
       /*
-      CONNECTING	0	
-      OPEN	      1	
-      CLOSING	    2	
-      CLOSED	    3	
+        CONNECTING	0	
+        OPEN	      1	
+        CLOSING	    2	
+        CLOSED	    3	
       */
       if (ws.readyState == 1) {
         ws.send(data);
@@ -134,29 +129,20 @@ function init() {
     // random values editor.mutator.mutate({reroll: false});
     if (window.ws.readyState != 1) {
       console.log('Socket connection retry')
-      window.socket = new WebSocket('wss://sophiadigitalart.fr/ws/');
-      console.log(`1 window.socket: ${window.socket}`)
-      console.log(`2 window.ws: ${window.ws}`)
+      //window.socket = new WebSocket('wss://sophiadigitalart.fr/ws/');
       window.ws = new WebSocket('wss://sophiadigitalart.fr/ws/');
-      console.log(`3 window.ws: ${window.ws}`)
+      console.log(`window.ws: ${window.ws}`)
       window.ws.onmessage = function (evt) {
         var messageData = JSON.parse(evt.data);
         if (messageData.event) {
-          console.log('4 Received ' + messageData.event);
           if (messageData.event == 'editortext') {
-            console.log('5 editortext message ' + messageData.message);
-  
             let code = messageData.message
             editor.setValue(code)
             repl.eval(code)
-  
           } 
-        } else {
-          console.log('6 Received unknown from remote peer ' + evt.data);
         }
       };
       window.ws.send = function (data) {
-        console.log('7 ws readyState' + ws.readyState);
         if (ws.readyState == 1) {
           ws.send(data);
         }

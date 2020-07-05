@@ -55,20 +55,11 @@ EditorClass.prototype.clear = function () {
 }
 
 EditorClass.prototype.setValue = function (val) {
-  // avoid socket loop
-  let prev = this.cm.getValue()
-  console.log(`prev ${prev.length} val ${val.length}`)
-  if (prev.length != val.length) {
-    console.log(`prev ${prev.substring(0, 15)} != val ${val.substring(0, 15)}`)
+  // check if same code
+  //let prev = this.cm.getValue()
+  //if (prev.length != val.length) {
     this.cm.setValue(val)
-  } else {
-    if (prev == val) {
-      console.log(`prev == val`)
-
-    } else {
-      console.log(`prev != val`)
-    }
-  }
+  //}
 }
 
 EditorClass.prototype.getValue = function () {
@@ -240,7 +231,7 @@ EditorClass.prototype.autoComplete = function () {
     default:
       found = false;
       break;
-  } // 2 char switch
+  } // 2 char switch end
   // 1 char
   if (!found) {
     pos1 = {
@@ -325,13 +316,6 @@ EditorClass.prototype.autoComplete = function () {
         pos2.ch += 10;
         editor.setSelection(pos1, pos2)
         break;
-      // main
-      /*case 'n':
-        editor.replaceRange(`void main () {vec2 st = (2.0*gl_FragCoord.xy-resolution.xy)/resolution.xy; gl_FragColor = vec4(st.x,st.y,0.0,1.0);}`, pos1, pos2)
-        pos1.ch += 74;
-        pos2.ch += 74;
-        editor.setSelection(pos1, pos2)
-        break;*/
       // for
       case 'r':
         editor.replaceRange('for (int i=0; i<2 ;i++) { }', pos1, pos2)
