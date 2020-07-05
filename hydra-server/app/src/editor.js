@@ -146,7 +146,6 @@ EditorClass.prototype.autoComplete = function () {
   var editor = this.cm
   var pos = editor.getCursor()
   var startline = pos.line
-  var endline = pos.line
 
   var found = true;
   var pos1 = {
@@ -227,7 +226,6 @@ EditorClass.prototype.autoComplete = function () {
       pos2.ch += 16;
       editor.setSelection(pos1, pos2)
       break;
-
     default:
       found = false;
       break;
@@ -271,6 +269,9 @@ EditorClass.prototype.autoComplete = function () {
         break;
       case '(':
         editor.replaceRange(`()`, pos1, pos2)
+        break;
+      case '[':
+        editor.replaceRange(`[]`, pos1, pos2)
         break;
       // frag functions
       case 'f':
