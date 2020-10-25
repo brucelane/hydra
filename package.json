@@ -1,6 +1,6 @@
 {
   "name": "hydra",
-  "version": "1.261020",
+  "version": "26.10.2020",
   "description": "",
   "main": "server.js",
   "scripts": {
