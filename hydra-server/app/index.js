@@ -113,14 +113,14 @@ function init() {
       ws.addEventListener(evt, func);
     };
     ws.onerror = function (e) { console.log('error: ' + e) };
-    ws.onopen = function (evt) { console.log('Socket opened') };
+    ws.onopen = function (evt) { console.log('WebSocket opened') };
     ws.onclose = function (evt) {
-      console.log('Socket closed')
+      console.log('WebSocket closed')
     };
   });
-  //window.socket = new ws('wss://sophiadigitalart.fr/ws/');8088 8089 8090
+  
   console.log(`ws url: ${process.env.WSURL} or ${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);
-  window.socket = new ws(`${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);//8091
+  window.socket = new ws(`${process.env.WSURL || 'wss://sophiadigitalart.fr/ws/'}`);//8091 51.210.25.83
   // websocket end
 
   // 20200703 borrino!
@@ -128,10 +128,11 @@ function init() {
     // random sketch menu.shuffleSketches()
     // random values editor.mutator.mutate({reroll: false});
     if (window.ws.readyState != 1) {
-      console.log('Socket connection retry')
+      console.log(`window.ws.readyState ${window.ws.readyState} != 1 `)
+      console.log(`WebSocket connection retry ${window.ws.url} = ${process.env.WSURL} = 'wss://sophiadigitalart.fr/ws/ `)
       //window.socket = new WebSocket('wss://sophiadigitalart.fr/ws/');
       window.ws = new WebSocket('wss://sophiadigitalart.fr/ws/');
-      console.log(`window.ws: ${window.ws}`)
+      console.log(`window.ws.readyState: ${window.ws.readyState}`)
       window.ws.onmessage = function (evt) {
         var messageData = JSON.parse(evt.data);
         if (messageData.event) {
