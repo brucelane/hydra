@@ -130,8 +130,8 @@ function init() {
     if (window.ws.readyState != 1) {
       console.log(`window.ws.readyState ${window.ws.readyState} != 1 `)
       console.log(`WebSocket connection retry ${window.ws.url} = ${process.env.WSURL} = 'wss://sophiadigitalart.fr/ws/ `)
-      //window.socket = new WebSocket('wss://sophiadigitalart.fr/ws/');
-      window.ws = new WebSocket('wss://sophiadigitalart.fr/ws/');
+      window.ws = new WebSocket('wss://wss.sophiadigitalart.fr:8092');
+      window.ws = new WebSocket('wss://wss.sophiadigitalart.fr:8091');
       console.log(`window.ws.readyState: ${window.ws.readyState}`)
       window.ws.onmessage = function (evt) {
         var messageData = JSON.parse(evt.data);
