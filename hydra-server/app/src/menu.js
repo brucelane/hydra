@@ -43,7 +43,7 @@ class Menu {
         //console.log('bruce')
         console.log('send to ws server')
         // 20200703 bruce
-        if (window.socket) {
+        /*if (window.socket) {
           console.log('window.socket ok')
           try {
             //window.socket.send(JSON.stringify({event:'editortext', message: jsString }));
@@ -53,7 +53,7 @@ class Menu {
             console.log("1 websocket error", JSON.stringify(e))
           }
         }
-        /* Cinder 20201122 before 25 september 2019 OK */
+         Cinder 20201122 before 25 september 2019 OK 
         if (window.socket) {
           try {
             
@@ -63,7 +63,7 @@ class Menu {
             console.log("2 websocket error", JSON.stringify(e))
           }
         }
-        /* Cinder 20201122 before 25 september 2019 OK */
+         Cinder 20201122 before 25 september 2019 OK 
         if (window.socket) {
           try {
             window.socket.send(JSON.stringify({event:'frag', message: this.compile(pass)}));
@@ -72,7 +72,7 @@ class Menu {
             // handle error (server not connected for example)
             console.log("3 websocket error", JSON.stringify(e))
           }
-        }
+        }*/
 
         this.sketches.saveLocally(this.editor.getValue())
       } 
