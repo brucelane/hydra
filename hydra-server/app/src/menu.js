@@ -53,7 +53,7 @@ class Menu {
             console.log(" websocket error", JSON.stringify(e))
           }
         }
-        /* Cinder before 25 september 2019 OK
+        /* Cinder 20201122 before 25 september 2019 OK */
         if (window.socket) {
           try {
             window.socket.send(JSON.stringify({event:'frag', message: this.compile(pass)}));
@@ -62,7 +62,7 @@ class Menu {
             // handle error (server not connected for example)
             console.log(" websocket error", JSON.stringify(e))
           }
-        } */
+        }
 
         this.sketches.saveLocally(this.editor.getValue())
       } 
