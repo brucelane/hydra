@@ -47,17 +47,18 @@ class Menu {
           console.log('window.socket ok')
           try {
             //window.socket.send(JSON.stringify({event:'editortext', message: jsString }));
+            /* Cinder 20201122 before 25 september 2019 OK */
+            window.socket.send(JSON.stringify({event:'frag', message: this.compile(pass)}));
+            window.socket.send(JSON.stringify({event:'hydra', message: JSON.stringify(pass) }));
             window.socket.send(JSON.stringify({event:'editortext', message: string }));
           } catch (e) {
             // handle error (server not connected for example)
             console.log(" websocket error", JSON.stringify(e))
           }
         }
-        /* Cinder 20201122 before 25 september 2019 OK */
+        
         if (window.socket) {
           try {
-            window.socket.send(JSON.stringify({event:'frag', message: this.compile(pass)}));
-            window.socket.send(JSON.stringify({event:'hydra', message: JSON.stringify(pass) }));
           } catch (e) {
             // handle error (server not connected for example)
             console.log(" websocket error", JSON.stringify(e))
