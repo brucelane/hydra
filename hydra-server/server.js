@@ -22,8 +22,9 @@ var io = require('socket.io')(server)
 require('./twitter-gallery.js')(app)
 const host = process.env.SDA || 'http://localhost';
 const port = process.env.PORT || 8000;
-app.use(express.static(path.join(__dirname, '/public')))
-//app.use(express.static('public'))
+console.log("public:" + path.join(__dirname, '/public'));
+//app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static('public'))
 //console.log("DIRECTORY= "+path.join(__dirname, '/public'));
 // crear un servidor en puerto 8000
 server.listen(8000, function () {
