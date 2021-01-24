@@ -6,9 +6,9 @@ const express = require('express')
 const app = express()
 const browserify = require('browserify-middleware')
 const path = require('path')
-//const configureSSL = require('./configure-ssl.js')
-//var server = configureSSL(app)
-var server = app
+const configureSSL = require('./configure-ssl.js')
+var server = configureSSL(app)
+//var server = app
 
 //
 // TURN server access
@@ -20,10 +20,8 @@ if(process.env.TWILIO_SID) {
 
 var io = require('socket.io')(server)
 require('./twitter-gallery.js')(app)
-//const host = process.env.SDA || 'https://localhost';
-//const port = process.env.PORT || 8000;
-const host = 'http://localhost';
-const port = 8000;
+const host = process.env.SDA || 'https://localhost';
+const port = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname, '/public')))
 //app.use(express.static('public'))
 //console.log("DIRECTORY= "+path.join(__dirname, '/public'));
